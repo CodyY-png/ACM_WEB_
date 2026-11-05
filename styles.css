@@ -3,10 +3,6 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   margin: 0;
   font-family: Arial, "Microsoft JhengHei", sans-serif;
@@ -14,11 +10,13 @@ body {
   background-color: #fff;
 }
 
-/* 封面圖片 */
+/* 海報 */
 header {
   width: 100%;
-  margin: 0;
-  padding: 0;
+}
+
+.banner {
+  position: relative;
 }
 
 .ACM_logo {
@@ -27,51 +25,155 @@ header {
   height: auto;
 }
 
-/* 導覽列 */
-nav {
+/* 海報右上角：社群連結 */
+.social-links {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.social-links a {
+  --hover-color: #172735;
+
+  position: relative;
+  display: inline-block;
+  padding: 8px 2px;
+
+  color: #172735;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.social-links .youtube {
+  --hover-color: #c4302b;
+}
+
+.social-links .facebook {
+  --hover-color: #1877f2;
+}
+
+.social-links .instagram {
+  --hover-color: #b52d73;
+}
+
+/* 社群連結底線動畫 */
+.social-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+  background-color: currentColor;
+
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.social-links a:hover,
+.social-links a:focus-visible {
+  color: var(--hover-color);
+  transform: translateY(-3px);
+}
+
+.social-links a:hover::after,
+.social-links a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.social-links a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+/* 主要導覽列 */
+.main-nav {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  column-gap: 60px;
-  row-gap: 20px;
-  padding: 24px;
+
+  column-gap: 48px;
+  row-gap: 16px;
+  padding: 20px 24px;
+
   background-color: #172735;
 }
 
-nav a {
+.main-nav a {
+  position: relative;
+  display: inline-block;
+  padding: 8px 0;
+
   color: #fff;
-  text-decoration: none;
   font-size: 16px;
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
-nav a:hover {
+/* 選單底線動畫 */
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+  background-color: #d8fa79;
+
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.main-nav a:hover,
+.main-nav a:focus-visible {
+  color: #d8fa79;
+  transform: translateY(-2px);
+}
+
+.main-nav a:hover::after,
+.main-nav a:focus-visible::after,
+.main-nav a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.main-nav a[aria-current="page"] {
   color: #d8fa79;
 }
 
-nav a:focus-visible {
+.main-nav a:focus-visible {
   outline: 2px solid #d8fa79;
   outline-offset: 6px;
 }
 
-/* 主要內容 */
+/* 內容區 */
 main {
   max-width: 1100px;
+  min-height: 320px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 48px 24px;
 }
 
-/* 各區塊 */
-section {
-  padding: 56px 0;
-  border-bottom: 1px solid #e0e3dd;
-  scroll-margin-top: 24px;
+[hidden] {
+  display: none !important;
 }
 
-section:last-child {
-  border-bottom: none;
-}
-
-/* 上方英文小標 */
+/* 英文小標 */
 .section-label {
   margin: 0 0 14px;
   color: #637547;
@@ -80,37 +182,80 @@ section:last-child {
   letter-spacing: 2px;
 }
 
-/* 下方中文大標 */
-section h2 {
+/* 中文大標 */
+main h1 {
   margin: 0;
   font-size: clamp(26px, 3vw, 36px);
   line-height: 1.4;
 }
 
-/* 手機版 */
-@media (max-width: 700px) {
-  nav {
-    column-gap: 24px;
-    row-gap: 16px;
-    padding: 20px;
+main h1:focus-visible {
+  outline: 2px solid #637547;
+  outline-offset: 6px;
+}
+
+/* 切換畫面：漸入並稍微向上移動 */
+.page-enter {
+  animation: pageFadeIn 0.4s ease-out both;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
 
-  nav a {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 手機版 */
+@media (max-width: 700px) {
+  .social-links {
+    top: 6px;
+    right: 10px;
+    gap: 14px;
+  }
+
+  .social-links a {
+    padding: 6px 0;
+    font-size: 11px;
+  }
+
+  .main-nav {
+    column-gap: 24px;
+    row-gap: 8px;
+    padding: 16px;
+  }
+
+  .main-nav a {
     font-size: 14px;
   }
 
   main {
-    padding: 0 20px;
-  }
-
-  section {
-    padding: 36px 0;
+    padding: 36px 20px;
   }
 }
 
-/* 減少動畫 */
+/* 配合減少動畫的偏好 */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  .social-links a,
+  .social-links a::after,
+  .main-nav a,
+  .main-nav a::after {
+    transition: none;
+  }
+
+  .social-links a:hover,
+  .social-links a:focus-visible,
+  .main-nav a:hover,
+  .main-nav a:focus-visible {
+    transform: none;
+  }
+
+  .page-enter {
+    animation: none;
   }
 }

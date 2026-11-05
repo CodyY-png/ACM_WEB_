@@ -4,19 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ACM 接案小組</title>
+
   <link rel="stylesheet" href="./styles.css">
+  <script src="./web.js" defer></script>
 </head>
 
 <body>
   <header>
-    <img
-      class="ACM_logo"
-      src="./ACM_logo.png"
-      alt="ACM 接案小組"
-    >
+    <!-- 海報與社群連結 -->
+    <div class="banner">
+      <img
+        class="ACM_logo"
+        src="./圖庫/ACM_logo.png"
+        alt="ACM 接案小組"
+      >
 
-    <nav aria-label="主要導覽">
-      <a href="#about">關於我們</a>
+      <div class="social-links" aria-label="社群平台">
+        <a
+          class="youtube"
+          href="https://www.youtube.com/@ncnuACM"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          YouTube
+        </a>
+
+        <a
+          class="facebook"
+          href="https://www.facebook.com/share/g/19hUCZwvEt/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Facebook
+        </a>
+
+        <a
+          class="instagram"
+          href="https://www.instagram.com/acm.ncnu/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Instagram
+        </a>
+      </div>
+    </div>
+
+    <!-- 主要選單 -->
+    <nav class="main-nav" aria-label="主要導覽">
+      <a href="#about" aria-current="page">關於我們</a>
       <a href="#skills">學習技能</a>
       <a href="#tutorials">教學講義</a>
       <a href="#resources">學習資源</a>
@@ -25,35 +60,36 @@
     </nav>
   </header>
 
+  <!-- 每次只顯示一個畫面 -->
   <main>
-    <section id="about">
+    <section id="about" aria-labelledby="about-title">
       <p class="section-label">ABOUT US</p>
-      <h2>關於我們</h2>
+      <h1 id="about-title" tabindex="-1">關於我們</h1>
     </section>
 
-    <section id="skills">
+    <section id="skills" aria-labelledby="skills-title" hidden>
       <p class="section-label">OUR SKILLS</p>
-      <h2>學習技能</h2>
+      <h1 id="skills-title" tabindex="-1">學習技能</h1>
     </section>
 
-    <section id="tutorials">
+    <section id="tutorials" aria-labelledby="tutorials-title" hidden>
       <p class="section-label">TUTORIALS</p>
-      <h2>教學講義</h2>
+      <h1 id="tutorials-title" tabindex="-1">教學講義</h1>
     </section>
 
-    <section id="resources">
+    <section id="resources" aria-labelledby="resources-title" hidden>
       <p class="section-label">RESOURCES</p>
-      <h2>學習資源</h2>
+      <h1 id="resources-title" tabindex="-1">學習資源</h1>
     </section>
 
-    <section id="work">
-      <p class="section-label">OUR WORK</p>
-      <h2>活動成果</h2>
+    <section id="work" aria-labelledby="work-title" hidden>
+      <p class="section-label">ACTIVITIES</p>
+      <h1 id="work-title" tabindex="-1">活動成果</h1>
     </section>
 
-    <section id="members">
+    <section id="members" aria-labelledby="members-title" hidden>
       <p class="section-label">OUR TEAM</p>
-      <h2>成員</h2>
+      <h1 id="members-title" tabindex="-1">成員</h1>
     </section>
   </main>
 </body>
