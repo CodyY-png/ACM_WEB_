@@ -1,0 +1,116 @@
+/* 基本設定 */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, "Microsoft JhengHei", sans-serif;
+  color: #172735;
+  background-color: #fff;
+}
+
+/* 封面圖片 */
+header {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.ACM_logo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 導覽列 */
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 60px;
+  row-gap: 20px;
+  padding: 24px;
+  background-color: #172735;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+nav a:hover {
+  color: #d8fa79;
+}
+
+nav a:focus-visible {
+  outline: 2px solid #d8fa79;
+  outline-offset: 6px;
+}
+
+/* 主要內容 */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* 各區塊 */
+section {
+  padding: 56px 0;
+  border-bottom: 1px solid #e0e3dd;
+  scroll-margin-top: 24px;
+}
+
+section:last-child {
+  border-bottom: none;
+}
+
+/* 上方英文小標 */
+.section-label {
+  margin: 0 0 14px;
+  color: #637547;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+/* 下方中文大標 */
+section h2 {
+  margin: 0;
+  font-size: clamp(26px, 3vw, 36px);
+  line-height: 1.4;
+}
+
+/* 手機版 */
+@media (max-width: 700px) {
+  nav {
+    column-gap: 24px;
+    row-gap: 16px;
+    padding: 20px;
+  }
+
+  nav a {
+    font-size: 14px;
+  }
+
+  main {
+    padding: 0 20px;
+  }
+
+  section {
+    padding: 36px 0;
+  }
+}
+
+/* 減少動畫 */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
