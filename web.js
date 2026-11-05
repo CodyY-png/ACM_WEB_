@@ -78,3 +78,42 @@ window.addEventListener("hashchange", syncPage);
 
 // 初次開啟或重新整理
 showPage(location.hash.slice(1));
+
+// 海報裝飾與滑鼠視差
+const banner = document.querySelector(".banner");
+if (banner) {
+  const symbols = document.createElement("div");
+  symbols.className = "banner-symbols";
+  symbols.setAttribute("aria-hidden", "true");
+  ["</>", "{ }", "[ ]", "=>"].forEach((text) => {
+    const symbol = document.createElement("span");
+    symbol.textContent = text;
+    symbols.appendChild(symbol);
+  });
+  banner.appendChild(symbols);
+
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const finePointer = matchMedia("(hover: hover) and (pointer: fine)");
+  const resetPan = () => {
+    banner.style.setProperty("--pan-x", "0px");
+    banner.style.setProperty("--pan-y", "0px");
+  };
+
+let frame = 0;
+  banner.addEventListener("pointermove", (event) => {
+    if (reduceMotion.matches || !finePointer.matches) return;
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      const rect = banner.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 12;
+      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 8;
+      banner.style.setProperty("--pan-x", `${x}px`);
+      banner.style.setProperty("--pan-y", `${y}px`);
+    });
+  });
+  banner.addEventListener("pointerleave", () => {
+    cancelAnimationFrame(frame);
+    resetPan();
+  });
+  reduceMotion.addEventListener("change", resetPan);
+}

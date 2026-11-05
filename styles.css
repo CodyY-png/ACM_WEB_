@@ -329,3 +329,60 @@ main::after {
   }
 }
 
+
+/* 海報：符號飄動、滑鼠視差與淡綠光暈 */
+.banner {
+  overflow: hidden;
+  isolation: isolate;
+}
+.banner .ACM_logo {
+  transform: translate(var(--pan-x, 0px), var(--pan-y, 0px)) scale(1.035);
+  transition: transform 0.45s ease-out;
+}
+.banner::before {
+  content: "";
+  position: absolute;
+  inset: -15%;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 12% 70%, #b7d87840, transparent 35%),
+              radial-gradient(ellipse at 85% 20%, #d8fa7930, transparent 32%);
+  animation: bannerGlow 12s ease-in-out infinite alternate;
+}
+.banner .social-links { z-index: 3; }
+.banner-symbols {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.banner-symbols span {
+  position: absolute;
+  color: #536c37;
+  opacity: 0.48;
+  font: 600 clamp(20px, 2.6vw, 42px) monospace;
+  animation: codeFloat 4.5s ease-in-out infinite alternate;
+}
+.banner-symbols span:nth-child(1) { left: 5%; top: 18%; }
+.banner-symbols span:nth-child(2) { left: 19%; top: 79%; animation-delay: -3s; }
+.banner-symbols span:nth-child(3) { right: 7%; top: 70%; animation-delay: -5s; }
+.banner-symbols span:nth-child(4) { right: 30%; top: 15%; animation-delay: -2s; }
+@keyframes codeFloat {
+  from { transform: translateY(0) rotate(-5deg); }
+  to { transform: translate(10px, -32px) rotate(8deg); }
+}
+@keyframes bannerGlow {
+  from { transform: translate(-2%, 0); opacity: 0.55; }
+  to { transform: translate(3%, 3%); opacity: 0.95; }
+}
+@media (max-width: 700px) {
+  .banner-symbols span:nth-child(2),
+  .banner-symbols span:nth-child(4) { display: none; }
+  .banner .ACM_logo { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .banner::before,
+  .banner-symbols span { animation: none; }
+  .banner .ACM_logo { transform: none; transition: none; }
+}
+
