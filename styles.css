@@ -5,7 +5,7 @@
 
 body {
   margin: 0;
-  font-family: Arial, "Microsoft JhengHei", sans-serif;
+  font-family: "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", sans-serif;
   color: #172735;
   background-color: #fff;
 }
@@ -30,7 +30,6 @@ header {
   position: absolute;
   top: 20px;
   right: 24px;
-
   display: flex;
   align-items: center;
   gap: 22px;
@@ -42,7 +41,6 @@ header {
   position: relative;
   display: inline-block;
   padding: 8px 2px;
-
   color: #172735;
   font-size: 14px;
   font-weight: bold;
@@ -65,13 +63,11 @@ header {
   --hover-color: #b52d73;
 }
 
-/* 社群連結底線動畫 */
 .social-links a::after {
   content: "";
   position: absolute;
   bottom: 2px;
   left: 0;
-
   width: 100%;
   height: 2px;
   background-color: currentColor;
@@ -97,16 +93,14 @@ header {
   outline-offset: 4px;
 }
 
-/* 主要導覽列 */
+/* 主要選單 */
 .main-nav {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-
   column-gap: 48px;
   row-gap: 16px;
   padding: 20px 24px;
-
   background-color: #172735;
 }
 
@@ -114,9 +108,8 @@ header {
   position: relative;
   display: inline-block;
   padding: 8px 0;
-
   color: #fff;
-  font-size: 16px;
+  font-size: 17px;
   text-decoration: none;
 
   transition:
@@ -124,13 +117,11 @@ header {
     transform 0.2s ease;
 }
 
-/* 選單底線動畫 */
 .main-nav a::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
-
   width: 100%;
   height: 2px;
   background-color: #d8fa79;
@@ -166,7 +157,7 @@ main {
   max-width: 1100px;
   min-height: 320px;
   margin: 0 auto;
-  padding: 48px 24px;
+  padding: 56px 24px 80px;
 }
 
 [hidden] {
@@ -176,8 +167,8 @@ main {
 /* 英文小標 */
 .section-label {
   margin: 0 0 14px;
-  color: #637547;
-  font-size: 13px;
+  color: #637747;
+  font-size: 14px;
   font-weight: bold;
   letter-spacing: 2px;
 }
@@ -185,7 +176,9 @@ main {
 /* 中文大標 */
 main h1 {
   margin: 0;
-  font-size: clamp(26px, 3vw, 36px);
+  color: #344652;
+  font-weight: 600;
+  font-size: clamp(30px, 3vw, 40px);
   line-height: 1.4;
 }
 
@@ -194,7 +187,34 @@ main h1:focus-visible {
   outline-offset: 6px;
 }
 
-/* 切換畫面：漸入並稍微向上移動 */
+/* 關於我們：加大字體、加深顏色 */
+.about-content {
+  max-width: 960px;
+  margin-top: 32px;
+  color: #53616b;
+  font-size: 20px;
+  line-height: 1.95;
+  overflow-wrap: break-word;
+}
+
+.about-content p {
+  margin: 0 0 28px;
+}
+
+/* 文章中的小標題 */
+.about-content h2 {
+  margin: 44px 0 18px;
+  color: #344652;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 1.5;
+}
+
+.about-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* 畫面漸入 */
 .page-enter {
   animation: pageFadeIn 0.4s ease-out both;
 }
@@ -231,11 +251,22 @@ main h1:focus-visible {
   }
 
   .main-nav a {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   main {
-    padding: 36px 20px;
+    padding: 36px 20px 56px;
+  }
+
+  .about-content {
+    margin-top: 24px;
+    font-size: 18px;
+    line-height: 1.9;
+  }
+
+  .about-content h2 {
+    margin-top: 34px;
+    font-size: 23px;
   }
 }
 
@@ -259,3 +290,42 @@ main h1:focus-visible {
     animation: none;
   }
 }
+/* 正文兩側：淡色直立漸層海報 */
+main {
+  position: relative;
+  isolation: isolate;
+}
+
+main::before,
+main::after {
+  content: "";
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  width: clamp(120px, calc((100vw - 1148px) / 2), 260px);
+  min-height: 540px;
+  background-image: url("./圖庫/acm-side-gradient.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100% 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+main::before {
+  right: calc(100% + 12px);
+}
+
+main::after {
+  left: calc(100% + 12px);
+  transform: scaleX(-1);
+}
+
+/* 側邊留白不足時隱藏，不遮住正文 */
+@media (max-width: 1439px) {
+  main::before,
+  main::after {
+    display: none;
+  }
+}
+

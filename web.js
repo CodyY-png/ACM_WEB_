@@ -10,13 +10,13 @@ function showPage(id, moveFocus = false) {
   const currentId = pageExists ? id : "about";
   const currentSection = document.getElementById(currentId);
 
-  // 隱藏其他畫面，清除上一次動畫
+  // 隱藏其他畫面，清除先前動畫
   sections.forEach((section) => {
     section.classList.remove("page-enter");
     section.hidden = section.id !== currentId;
   });
 
-  // 重新播放進場動畫
+  // 重新觸發漸入動畫
   void currentSection.offsetWidth;
   currentSection.classList.add("page-enter");
 
@@ -29,9 +29,8 @@ function showPage(id, moveFocus = false) {
     }
   });
 
-  // 更新瀏覽器分頁標題
   const heading = currentSection.querySelector("h1");
-  document.title = `${heading.textContent}｜ACM 接案小組`;
+  document.title = "ACM小組";
 
   if (moveFocus) {
     heading.focus({ preventScroll: true });
@@ -41,7 +40,7 @@ function showPage(id, moveFocus = false) {
 // 點選主要選單
 links.forEach((link) => {
   link.addEventListener("click", (event) => {
-    // 保留另開分頁等瀏覽器原生操作
+    // 保留另開分頁等原生操作
     if (
       event.ctrlKey ||
       event.metaKey ||
@@ -57,11 +56,12 @@ links.forEach((link) => {
       history.pushState(null, "", link.hash);
     }
 
+    lastLocation = location.href;
     showPage(link.hash.slice(1), true);
   });
 });
 
-// 配合網址顯示畫面，避免同一次切換重複播放動畫
+// 同步瀏覽器上一頁、下一頁與網址變化
 let lastLocation = location.href;
 
 function syncPage() {
